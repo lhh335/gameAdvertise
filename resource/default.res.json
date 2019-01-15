@@ -1,0 +1,75 @@
+{
+	"groups": [
+		{
+			"keys": "t1_background_png,t1_notice_png,t1_beauty_png,description_json,t2_background_png,t2_notice_png,t2_qrBox_png,t2_special1_png,t2_special2_png,t3_background_png,t3_notice_png,t3_qr_png,t3_platform_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "t1_background_png",
+			"type": "image",
+			"url": "assets/temp1/background.png"
+		},
+		{
+			"name": "t1_notice_png",
+			"type": "image",
+			"url": "assets/temp1/notice.png"
+		},
+		{
+			"name": "t1_beauty_png",
+			"type": "image",
+			"url": "assets/temp1/beauty.png"
+		},
+		{
+			"name": "t2_background_png",
+			"type": "image",
+			"url": "assets/temp2/background.png"
+		},
+		{
+			"name": "t2_notice_png",
+			"type": "image",
+			"url": "assets/temp2/notice.png"
+		},
+		{
+			"name": "t2_qrBox_png",
+			"type": "image",
+			"url": "assets/temp2/qrBox.png"
+		},
+		{
+			"name": "t2_special1_png",
+			"type": "image",
+			"url": "assets/temp2/Special1.png"
+		},
+		{
+			"name": "t2_special2_png",
+			"type": "image",
+			"url": "assets/temp2/Special2.png"
+		},
+		{
+			"name": "t3_background_png",
+			"type": "image",
+			"url": "assets/temp3/background.png"
+		},
+		{
+			"name": "t3_notice_png",
+			"type": "image",
+			"url": "assets/temp3/notice.png"
+		},
+		{
+			"name": "t3_qr_png",
+			"type": "image",
+			"url": "assets/temp3/qr.png"
+		},
+		{
+			"name": "t3_platform_png",
+			"type": "image",
+			"url": "assets/temp3/platform.png"
+		}
+	]
+}

@@ -1,0 +1,42 @@
+{
+  "native": {
+    "path_ignore": []
+  },
+  "publish": {
+    "web": 0,
+    "native": 1,
+    "path": "bin-release"
+  },
+  "egret_version": "5.0.13",
+  "template": {},
+  "modules": [
+    {
+      "name": "egret"
+    },
+    {
+      "name": "game"
+    },
+    {
+      "name": "tween"
+    },
+    {
+      "name": "res"
+    },
+    {
+      "name": "qrcode",
+      "path": "./libs/qrcode"
+    },
+    {
+      "name": "promise",
+      "path": "./libs/promise"
+    },
+    {
+      "name": "av",
+      "path": "./libs/av"
+    },
+    {
+      "name": "av_helper",
+      "path": "./libs/av"
+    }
+  ]
+}

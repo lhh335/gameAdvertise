@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>达达游戏</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <link rel="icon" href="./favicon.png" type="image/x-icon" />
+    <style>
+        html,
+        body {
+            -ms-touch-action: none;
+            background: #888888;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+        #image_mask {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 20;
+        }
+
+        #image {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto auto;
+        }
+
+        #closeMask {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            width: 50px;
+            height: 24px;
+            color: #fff;
+            font-size: 24px;
+            z-index: 45;
+            cursor: pointer;
+        }
+
+        #version {
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            color: #F2D693;
+            font-size: 18px;
+            z-index: 99;
+        }
+
+        #tip {
+            width: 200px;
+            height: 18px;
+            line-height: 18px;
+            position: fixed;
+            top: 0px;
+            left: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            z-index: 99;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="version">__VERSION__</div>
+    <div style="margin: auto;width: 100%;height: 100%;" class="egret-player" data-entry-class="Main" data-orientation="auto"
+        data-scale-mode="showAll" data-frame-rate="30" data-content-width="720" data-content-height="1280" data-show-paint-rect="false"
+        data-multi-fingered="2" data-show-fps="false" data-show-log="false" data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
+    </div>
+    <script>
+        var loadScript = function (list, callback) {
+            var loaded = 0;
+            var loadNext = function () {
+                loadSingleScript(list[loaded], function () {
+                    loaded++;
+                    if (loaded >= list.length) {
+                        callback();
+                    }
+                    else {
+                        loadNext();
+                    }
+                })
+            };
+            loadNext();
+        };
+
+        var loadSingleScript = function (src, callback) {
+            var s = document.createElement('script');
+            s.async = false;
+            s.src = src;
+            s.addEventListener('load', function () {
+                s.parentNode.removeChild(s);
+                s.removeEventListener('load', arguments.callee, false);
+                callback();
+            }, false);
+            document.body.appendChild(s);
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', './manifest.json?v=' + Math.random(), true);
+        xhr.addEventListener("load", function () {
+            var manifest = JSON.parse(xhr.response);
+            var list = manifest.initial.concat(manifest.game);
+            loadScript(list, function () {
+                /**
+                 * {
+                 * "renderMode":, //Engine rendering mode, "canvas" or "webgl"
+                 * "audioType": 0 //Use the audio type, 0: default, 2: web audio, 3: audio
+                 * "antialias": //Whether the anti-aliasing is enabled in WebGL mode, true: on, false: off, defaults to false
+                 * "calculateCanvasScaleFactor": //a function return canvas scale factor
+                 * }
+                 **/
+                egret.runEgret({
+                    renderMode: "webgl", audioType: 0, calculateCanvasScaleFactor: function (context) {
+                        var backingStore = context.backingStorePixelRatio ||
+                            context.webkitBackingStorePixelRatio ||
+                            context.mozBackingStorePixelRatio ||
+                            context.msBackingStorePixelRatio ||
+                            context.oBackingStorePixelRatio ||
+                            context.backingStorePixelRatio || 1;
+                        return (window.devicePixelRatio || 1) / backingStore;
+                    }
+                });
+            });
+        });
+        xhr.send(null);
+    </script>
+</body>
+
+</html>
